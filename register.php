@@ -1,8 +1,6 @@
 <?php
-
-    require "libs/vars.php";
-    // require "libs/functions.php";  
-    require "libs/ayar.php";
+ 
+    require "libs/connection.php";
 
     $username = $email = $password = $confirm_password = "";
     $username_err = $email_err = $password_err = $confirm_password_err = "";

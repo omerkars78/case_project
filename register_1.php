@@ -1,7 +1,7 @@
 <?php
 require "libs/connection.php";
 
-#$username = $email = $password = $repassword = "";
+$username = $email = $password = $repassword = "";
 
 
 
@@ -54,24 +54,26 @@ if (isset($_POST["register"])) {
     }
 
     // validate password
-    if (trim($_POST["password"])) {
+    if($_POST("username") && $_POST("email") && $_POST("password")) {
         $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
-        if ($stmt = mysqli_prepare($connection, $sql)) {
 
-            $param_username = $username;
-            $param_email = $email;
-            $param_password = password_hash($password, PASSWORD_DEFAULT);
+        if($stmt = mysqli_prepare($connection, $sql)) {
+            
+             $param_username = $username;
+             $param_email = $email;
+             $param_password = password_hash($password, PASSWORD_DEFAULT);
 
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
+             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
 
-            if (mysqli_stmt_execute($stmt)) {
-                header("location: login.php");
-            } else {
-                echo mysqli_error($connection);
-                echo "hata oluştu";
-            }
+             if(mysqli_stmt_execute($stmt)) {
+                 header("location: login.php");
+             } else {
+                 echo mysqli_error($connection);
+                 echo "hata oluştu";
+             }
         }
     }
+
 }
 
 ?>
