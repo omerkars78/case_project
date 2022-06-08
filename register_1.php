@@ -1,80 +1,81 @@
 <?php
-require "libs/connection.php";
+ 
+    require "libs/connection.php";
 
-$username = $email = $password = $repassword = "";
+    $username = $email = $password = $confirm_password = "";
+    $username_err = $email_err = $password_err = $confirm_password_err = "";
 
 
+    if (isset($_POST["register"])) {
 
-if (isset($_POST["register"])) {
+        
+        if($_POST["username"]) {
+            $sql = "SELECT id FROM users WHERE username = ?";
 
-    // validate username
-    if ((trim($_POST["username"]))) {
-        $sql = "SELECT id FROM users WHERE username = ?";
+            if($stmt = mysqli_prepare($connection, $sql)) {
+                $param_username = trim($_POST["username"]);
+                mysqli_stmt_bind_param($stmt, "s", $param_username);
 
-        if ($stmt = mysqli_prepare($connection, $sql)) {
-            $param_username = trim($_POST["username"]);
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+                if(mysqli_stmt_execute($stmt)) {
+                    mysqli_stmt_store_result($stmt);
 
-            if (mysqli_stmt_execute($stmt)) {
-                mysqli_stmt_store_result($stmt);
-
-                if (mysqli_stmt_num_rows($stmt) == 1) {
-                    $username_err = "username already has taken. Chose a new one.";
+                    if(mysqli_stmt_num_rows($stmt) == 1) {
+                        $username_err = "username daha önce alınmış.";
+                    } else {
+                        $username = $_POST["username"];
+                    }
                 } else {
-                    $username = $_POST["username"];
+                    echo mysqli_error($connection);
+                    echo "hata oluştu";
                 }
-            } else {
-                echo mysqli_error($connection);
-                echo "hata oluştu";
             }
-        }
-    }
 
-    // validate email
-    if (trim($_POST["email"])) {
-        $sql = "SELECT id FROM users WHERE email = ?";
+        } 
 
-        if ($stmt = mysqli_prepare($connection, $sql)) {
-            $param_email = trim($_POST["email"]);
-            mysqli_stmt_bind_param($stmt, "s", $param_email);
+        if($_POST["email"]) {
+            $sql = "SELECT id FROM users WHERE email = ?";
 
-            if (mysqli_stmt_execute($stmt)) {
-                mysqli_stmt_store_result($stmt);
+            if($stmt = mysqli_prepare($connection, $sql)) {
+                $param_email = trim($_POST["email"]);
+                mysqli_stmt_bind_param($stmt, "s", $param_email);
 
-                if (mysqli_stmt_num_rows($stmt) == 1) {
-                    $email_err = "email already has taken.";
+                if(mysqli_stmt_execute($stmt)) {
+                    mysqli_stmt_store_result($stmt);
+
+                    if(mysqli_stmt_num_rows($stmt) == 1) {
+                        $email_err = "email daha önce alınmış.";
+                    } else {
+                        $email = $_POST["email"];
+                    }
                 } else {
-                    $email = $_POST["email"];
+                    echo mysqli_error($connection);
+                    echo "hata oluştu";
                 }
-            } else {
-                echo mysqli_error($connection);
-                echo "Something happened wrong";
             }
-        }
+        }  
+
+       if($_POST["username"] && $_POST["email"] && $_POST["password"]) {
+           $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
+
+           if($stmt = mysqli_prepare($connection, $sql)) {
+               
+                $param_username = $username;
+                $param_email = $email;
+                $param_password = password_hash($password, PASSWORD_DEFAULT);
+
+                mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
+
+                if(mysqli_stmt_execute($stmt)) {
+                    header("location: login.php");
+                } else {
+                    echo mysqli_error($connection);
+                    echo "hata oluştu";
+                }
+           }
+       }
+
+      
     }
-
-    // validate password
-    if($_POST("username") && $_POST("email") && $_POST("password")) {
-        $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
-
-        if($stmt = mysqli_prepare($connection, $sql)) {
-            
-             $param_username = $username;
-             $param_email = $email;
-             $param_password = password_hash($password, PASSWORD_DEFAULT);
-
-             mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
-
-             if(mysqli_stmt_execute($stmt)) {
-                 header("location: login.php");
-             } else {
-                 echo mysqli_error($connection);
-                 echo "hata oluştu";
-             }
-        }
-    }
-
-}
 
 ?>
 <!DOCTYPE html>
@@ -94,24 +95,24 @@ if (isset($_POST["register"])) {
     <div class="container my-5 d-flex justify-content-center">
         <div class="col-sm-5">
             <div class="card">
-                <form id="form" novalidate>
+                <form action="register_1.php"  method="POST" id="form" novalidate>
                     <div class="card-header d-flex justify-content-center">Create User</div>
                     <div class="card-body">
 
                         <div class="form-group">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="username" class="form-label" value="<?php echo $username; ?>">Username</label>
                             <input type="text" name="username" id="username" class="form-control ">
                             <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="email" class="form-label">E-mail</label>
+                            <label for="email" class="form-label" value="<?php echo $email; ?>">E-mail</label>
                             <input type="email" name="email" id="email" class="form-control ">
                             <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label" value="<?php echo $password; ?>">Password</label>
                             <input type="password" name="password" id="password" class="form-control ">
                             <span class="invalid-feedback"></span>
                         </div>
