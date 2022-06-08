@@ -3,7 +3,7 @@
     $server ="localhost";
     $username = "root";
     $password = "";
-    $database = "blogapp";
+    $database = "case_project";
 
     $connection = mysqli_connect($server, $username, $password, $database);
     mysqli_set_charset($connection, "UTF8");

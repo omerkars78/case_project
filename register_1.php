@@ -15,30 +15,32 @@
         <div class="card">
             <form id="form" novalidate>
             <div class="card-header d-flex justify-content-center">Create User</div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" placeholder="Please Enter Username">
-                    <div></div>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-Mail</label>
-                    <input type="email" class="form-control" id="email" placeholder="Please Enter E-mail">
-                    <div></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" placeholder="Please Enter Password">
-                    <div></div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="repassword">Re-Password</label>
-                    <input type="password" class="form-control" id="repassword" placeholder="Please Enter Repassword">
-                    <div></div>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            
+            <div class="mb-3">
+                       <label for="username" class="form-label">username</label>
+                       <input type="text" name="username" id="username" class="form-control ">
+                       <span class="invalid-feedback"></span>
+                   </div>
+
+                   <div class="mb-3">
+                       <label for="email" class="form-label">email</label>
+                       <input type="email" name="email" id="email" class="form-control ">
+                       <span class="invalid-feedback"></span>
+                   </div>
+
+                   <div class="mb-3">
+                       <label for="password" class="form-label">password</label>
+                       <input type="password" name="password" id="password" class="form-control ">
+                       <span class="invalid-feedback"></span>
+                   </div>
+
+                   <div class="mb-3">
+                       <label for="confirm_password" class="form-label">confirm password</label>
+                       <input type="password" name="confirm_password" id="confirm_password" class="form-control ">
+                       <span class="invalid-feedback"></span>
+                   </div>
+
+                   <input type="submit" name="register" value="Submit" class="btn btn-primary">
             </form>
             </div>
         </div>
