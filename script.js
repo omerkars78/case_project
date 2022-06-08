@@ -49,7 +49,7 @@ function check_length(input, min, max) {
 
 function check_password(pword, repword) {
     if (pword.value !== repword.value) {
-        error(repassword, "Passords are not match!");
+        error(repassword, "Passwords are not match!");
     }
 }
 

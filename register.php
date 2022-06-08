@@ -5,7 +5,8 @@
     require "libs/ayar.php";
 
     $username = $email = $password = $confirm_password = "";
-    
+    $username_err = $email_err = $password_err = $confirm_password_err = "";
+
 
     if (isset($_POST["register"])) {
 
@@ -131,25 +132,25 @@
                     <div class="mb-3">
                        <label for="username" class="form-label">username</label>
                        <input type="text" name="username" id="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid': ''?>" value="<?php echo $username; ?>">
-                       <span class="invalid-feedback"></span>
+                       <span class="invalid-feedback"><?php echo $username_err; ?></span>
                    </div>
 
                    <div class="mb-3">
                        <label for="email" class="form-label">email</label>
                        <input type="email" name="email" id="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid': ''?>" value="<?php echo $email; ?>">
-                       <span class="invalid-feedback"></span>
+                       <span class="invalid-feedback"><?php echo $email_err; ?></span>
                    </div>
 
                    <div class="mb-3">
                        <label for="password" class="form-label">password</label>
                        <input type="password" name="password" id="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid': ''?>" value="<?php echo $password; ?>">
-                       <span class="invalid-feedback"></span>
+                       <span class="invalid-feedback"><?php echo $password_err; ?></span>
                    </div>
 
                    <div class="mb-3">
                        <label for="confirm_password" class="form-label">confirm password</label>
                        <input type="password" name="confirm_password" id="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid': ''?>" value="<?php echo $confirm_password; ?>">
-                       <span class="invalid-feedback"></span>
+                       <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                    </div>
 
                    <input type="submit" name="register" value="Submit" class="btn btn-primary">
