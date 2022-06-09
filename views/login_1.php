@@ -30,7 +30,7 @@
 <div class="container my-5 d-flex justify-content-center">
         <div class="col-sm-5">
             <div class="card">
-                <form action="login_1.php"  method="POST" id="form" novalidate>
+                <form action="register.php"  method="POST" id="form" novalidate>
                     <div class="card-header d-flex justify-content-center">Login</div>
                     <div class="card-body">
 
