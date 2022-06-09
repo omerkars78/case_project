@@ -4,7 +4,7 @@
     require "libs/connection.php";
 
     if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-        header("location: profile.php");
+        header("location: index.php");
         exit;
     }
 
@@ -43,7 +43,7 @@
                                 $_SESSION["id"] = $id;
                                 $_SESSION["username"] = $username;
 
-                                header("location: profile.php");
+                                header("location: index.php");
                             } else {
                                 $login_err = "yanlış parola girdiniz";
                             }
@@ -64,6 +64,7 @@
 ?>
 
 <?php include "views/_header.php" ?>
+
 
 <div class="container my-3">
 
