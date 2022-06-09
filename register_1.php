@@ -3,14 +3,24 @@
  
  require "libs/connection.php";
 
- $username = $email = $password = $confirm_password = "";
- $username_err = $email_err = $password_err = $confirm_password_err = "";
+ $username = $email = $password = $repassword = "";
+ $username_err = $email_err = $password_err = $re_password_err = "";
 
 
  if (isset($_POST["register"])) {
 
-     
-     if($_POST["username"]) {
+     // validate username
+     if(empty(trim($_POST["username"]))) { 
+         // eğer username alanı boş ise username girmemiz lazım
+         $username_err = "username girmelisiniz.";
+     } elseif (strlen(trim($_POST["username"])) < 5 or strlen(trim($_POST["username"])) > 15) {
+        // username 5-15 karakter arasında olmalıdır
+         $username_err = "username 5-15 karakter arasında olmalıdır."; 
+     } elseif (!preg_match('/^[a-z\d_]{5,20}$/i', $_POST["username"])) {
+        // username oluşturuken rakam harf ve _ olması koşulu var
+         $username_err = "username sadece rakam, harf ve alt çizgi karakterinden oluşmalıdır."; 
+     } else { 
+
          $sql = "SELECT id FROM users WHERE username = ?";
 
          if($stmt = mysqli_prepare($connection, $sql)) {
@@ -18,8 +28,8 @@
              mysqli_stmt_bind_param($stmt, "s", $param_username);
 
              if(mysqli_stmt_execute($stmt)) {
-                 mysqli_stmt_store_result($stmt);
-
+                 mysqli_stmt_store_result($stmt);     
+// Buradaki else bloğunda bir kontrol yapıyoruz aynı username daha önce alınmış mı kontrolü
                  if(mysqli_stmt_num_rows($stmt) == 1) {
                      $username_err = "username daha önce alınmış.";
                  } else {
@@ -31,9 +41,16 @@
              }
          }
 
-     } 
+         
+     }
 
-     if($_POST["email"]) {
+     // validate email
+     if(empty(trim($_POST["email"]))) {
+         $email_err = "email girmelisiniz.";
+         // Burada e-mail formatını kontrol ediyoruz
+     } elseif (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) { 
+         $email_err = "hatalı email girdiniz.";
+     } else {
          $sql = "SELECT id FROM users WHERE email = ?";
 
          if($stmt = mysqli_prepare($connection, $sql)) {
@@ -42,8 +59,8 @@
 
              if(mysqli_stmt_execute($stmt)) {
                  mysqli_stmt_store_result($stmt);
-
-                 if(mysqli_stmt_num_rows($stmt) == 1) {
+// burada e mail daha önce varm mı yokmu satırlardan onu arıyoruz ve kontrol etmiş oluyoruz
+                 if(mysqli_stmt_num_rows($stmt) == 1) { 
                      $email_err = "email daha önce alınmış.";
                  } else {
                      $email = $_POST["email"];
@@ -53,9 +70,33 @@
                  echo "hata oluştu";
              }
          }
-     }  
+     }
 
-    if($_POST["username"] && $_POST["email"] && $_POST["password"]) {
+     // validate password
+     if(empty(trim($_POST["password"]))) {
+         // eğer password alanı boşsa bu alanı doldurmalıyız.
+         $password_err = "password girmelisiniz.";
+     } elseif (strlen($_POST["password"]) < 6) {
+         // password 6 karakterden daha fazla olmalıdır burada bunu declare ediyoruz
+         $password_err = "password min. 6 karakter olmalıdır.";
+     } else {
+         $password = $_POST["password"];
+     }
+
+     // validate  re-password
+     if(empty(trim($_POST["repassword"]))) {
+         // eğer re-password alanı boş ise doldurmanız lazım
+         $repassword_err = "repassword girmelisiniz.";
+     } else {
+         $repassword = $_POST["repassword"];
+         // eğer re-password alanı boş değilse ve paralolar birbirinde farklı ise parolalar eşleşmiyor uyarısı yazdır
+         if(empty($password_err) && ($password != $repassword)) {
+             $repassword_err = "parolalar eşleşmiyor.";
+         }
+     }
+
+    // username için error yoksa email için yoksa ve password için yoksa artık insert edebiliriz
+    if(empty($username_err) && empty($email_err) && empty($password_err)) {
         $sql = "INSERT INTO users (username, email, password) VALUES (?,?,?)";
 
         if($stmt = mysqli_prepare($connection, $sql)) {
@@ -65,7 +106,7 @@
              $param_password = password_hash($password, PASSWORD_DEFAULT);
 
              mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
-
+            // daha sonrasında login.php sayfasına yönlendirme yapıyoruz. 
              if(mysqli_stmt_execute($stmt)) {
                  header("location: login.php");
              } else {
@@ -78,19 +119,7 @@
    
  }
 
-?><!DOCTYPE html>
-<html lang="tr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title>Form Validator</title>
-</head>
-
-<body>
+?>
 
     <div class="container my-5 d-flex justify-content-center">
         <div class="col-sm-5">
