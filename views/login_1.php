@@ -30,7 +30,7 @@
 <div class="container my-5 d-flex justify-content-center">
         <div class="col-sm-5">
             <div class="card">
-                <form action="register.php"  method="POST" id="form" novalidate>
+                <form action="login_1.php"  method="POST" id="form" novalidate>
                     <div class="card-header d-flex justify-content-center">Login</div>
                     <div class="card-body">
 
@@ -47,7 +47,7 @@
                         </div>
 
 
-                        <input type="submit" name="register" value="Submit" class="btn btn-primary btn-block">
+                        <input type="submit" name="register" value="Login" class="btn btn-primary btn-block">
                     </div>
                 </form>
             </div>
