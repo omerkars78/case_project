@@ -84,6 +84,7 @@ if (isset($_POST["login"])) {
 
 
                         <form action="login.php" method="POST">
+                            <div class="card-header d-flex justify-content-center">Login</div>
 
                             <div class="mb-3">
                                 <label for="username" class="form-label">username</label>
@@ -98,6 +99,10 @@ if (isset($_POST["login"])) {
                             </div>
 
                             <input type="submit" name="login" value="Submit" class="btn btn-primary btn-block">
+
+                            <div class="mb3">
+                                <a href="register.php" class="form-label">Hesabın yoksa buraya tıklayıp kayıt olabilirsin.</a>
+                            </div>
 
                         </form>
 
