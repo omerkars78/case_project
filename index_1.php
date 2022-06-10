@@ -20,6 +20,31 @@
         <div class="col-12">
     
            <h3>Merhaba, <?php echo htmlspecialchars($_SESSION["username"])?></h3>
+           <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Username</th>
+                        <th>E-mail</th>
+                        <th>Create Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $result = get_users();  while($user = mysqli_fetch_assoc($result)): ?>
+                        <tr>
+                            <td><?php echo $user["id"]?></td>
+                            <td><?php echo $user["username"]?></td>
+                            <td><?php echo $user["email"]?></td>
+                            <td><?php echo $user["create_time"]?></td>
+                            
+                            <!-- <td>
+                                <a class="btn btn-primary btn-sm" href="blog-edit.php?id=<?php echo $user["id"]?>">edit</a>
+                                <a class="btn btn-danger btn-sm" href="blog-delete.php?id=<?php echo $user["id"]?>">delete</a>
+                            </td> -->
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
            <div>
                 <a href="logout.php" class="btn btn-danger">Logout</a>
            </div>

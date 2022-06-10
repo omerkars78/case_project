@@ -1,31 +1,19 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a href="index.php" class="navbar-brand">BlogApp</a>
+        <a href="index_1.php" class="navbar-brand">Case Project</a>
 
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a href="blogs.php" class="nav-link">Blogs</a>
-                </li>
-                <?php if (isLoggedin()): ?>
-                    <li class="nav-item">
-                        <a href="admin-blogs.php" class="nav-link">Admin Blogs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="admin-categories.php" class="nav-link">Admin Categories</a>
-                    </li>
-                <?php endif; ?> 
-              
-            </ul>
+            
             <ul class="navbar-nav mb-2 mb-lg-0">
 
                 <?php if (isLoggedin()): ?>
 
-                    <li class="nav-item">
-                        <a href="logout.php" class="nav-link">Logout</a>
-                    </li>
+                   
                     <li class="nav-item">
                         <a href="#" class="nav-link">Hoş geldiniz, <?php echo $_SESSION["username"]?></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="logout.php" class="nav-link">Logout</a>
                     </li>
                 
                 <?php else: ?>
@@ -41,10 +29,7 @@
 
 
             </ul>
-            <form class="d-flex" action="blogs.php" method="GET">
-                <input type="text" name="q" class="form-control me-2" placeholder="Search">
-                <button class="btn btn-outline-light">Search</button>
-            </form>
+           
         </div>
     </div>
 </nav>
