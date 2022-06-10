@@ -20,4 +20,23 @@ function delete_user(int $id) {
     $result = mysqli_query($connection,$query);
     return $result;
 }
+function get_user_id(int $id) {
+    include "connection.php";
+
+    $query = "SELECT * from users WHERE users.id='$id'";
+    $result = mysqli_query($connection,$query);
+    mysqli_close($connection);
+    return $result;
+}
+function edit_users(int $id, string $username, string $email ) {
+    include "connection.php";
+
+    $query = "UPDATE users SET id='$id', username='$username',email='$email' WHERE users.id=$id";
+    $result = mysqli_query($connection,$query);
+    echo mysqli_error($connection);
+
+    return $result;
+}
 ?>
+
+

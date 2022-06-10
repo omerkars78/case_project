@@ -37,10 +37,10 @@
                             <td><?php echo $user["email"]?></td>
                             <td><?php echo $user["create_time"]?></td>
                             
-                            <!-- <td>
-                                <a class="btn btn-primary btn-sm" href="blog-edit.php?id=<?php echo $user["id"]?>">edit</a>
-                                <a class="btn btn-danger btn-sm" href="blog-delete.php?id=<?php echo $user["id"]?>">delete</a>
-                            </td> -->
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="edit_user.php?id=<?php echo $user["id"]?>">edit</a>
+                                <a class="btn btn-danger btn-sm" href="delete_user.php?id=<?php echo $user["id"]?>">delete</a>                
+                            </td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
