@@ -37,7 +37,7 @@
 
                         <div class="mb-3">
                             <label for="id" class="form-label">id</label>
-                            <input type="number" class="form-control" name="id" id="id" value="<?php echo $selected_user["id"]?>">
+                            <input  class="form-control" name="id" id="id" value="<?php echo $selected_user["id"]?>">
                         </div>
 
                         <div class="mb-3">
