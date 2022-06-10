@@ -6,7 +6,7 @@
     $id = $_GET["id"];
 
     if (delete_user($id)) {
-        header('Location: index_1.php');
+        header('Location: index.php');
     } else {
         echo "hata";
     } 

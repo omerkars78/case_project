@@ -4,7 +4,7 @@ require "libs/vars.php";
 require "libs/connection.php";
 
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: index_1.php");
+    header("location: index.php");
     exit;
 }
 
@@ -43,7 +43,7 @@ if (isset($_POST["login"])) {
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;
 
-                            header("location: index_1.php");
+                            header("location: index.php");
                         } else {
                             $login_err = "yanlış parola girdiniz";
                         }

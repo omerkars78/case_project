@@ -13,7 +13,7 @@
         $email = $_POST["email"];
 
         if (edit_users($id, $username, $email)) {
-            header('Location: index_1.php');
+            header('Location: index.php');
         } else {
             echo "hata";
         }

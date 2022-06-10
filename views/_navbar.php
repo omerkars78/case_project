@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a href="index_1.php" class="navbar-brand">Case Project</a>
+        <a href="index.php" class="navbar-brand">Case Project</a>
 
         <div class="collapse navbar-collapse">
             
