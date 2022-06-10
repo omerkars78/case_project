@@ -4,7 +4,7 @@ require "libs/vars.php";
 require "libs/connection.php";
 
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    header("location: index.php");
+    header("location: index_1.php");
     exit;
 }
 

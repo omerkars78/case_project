@@ -28,7 +28,7 @@ function get_user_id(int $id) {
     mysqli_close($connection);
     return $result;
 }
-function edit_users(int $id, string $username, string $email ) {
+function edit_users( int $id, string  $username, string $email ) {
     include "connection.php";
 
     $query = "UPDATE users SET users.id='$id' , users.username='$username', users.email='$email' WHERE users.id=$id";

@@ -13,9 +13,6 @@
         $email = $_POST["email"];
 
         if (edit_users($id, $username, $email)) {
-            $_SESSION['message'] = $username." isimli kullanıcı güncellendi.";
-            $_SESSION['type'] = "success";
-
             header('Location: index_1.php');
         } else {
             echo "hata";
@@ -45,7 +42,7 @@
 
                         <div class="mb-3">
                             <label for="username" class="form-label">username</label>
-                            <input name="username" type="text" id="username" class="form-control" value="<?php echo $selected_user["username"]?>">
+                            <input name="username" type="text"  class="form-control" id="username" value="<?php echo $selected_user["username"]?>">
                         </div>
 
                         <div class="mb-3">
