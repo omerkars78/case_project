@@ -107,7 +107,7 @@
              mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_email, $param_password);
             // daha sonrasında login.php sayfasına yönlendirme yapıyoruz. 
              if(mysqli_stmt_execute($stmt)) {
-                 header("location: login_1.php");
+                 header("location: login.php");
              } else {
                  echo mysqli_error($connection);
                  echo "hata oluştu";

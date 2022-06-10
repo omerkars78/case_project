@@ -36,11 +36,6 @@
                     <form method="POST">
 
                         <div class="mb-3">
-                            <label for="id" class="form-label">id</label>
-                            <input  class="form-control" name="id" id="id" value="<?php echo $selected_user["id"]?>">
-                        </div>
-
-                        <div class="mb-3">
                             <label for="username" class="form-label">username</label>
                             <input name="username" type="text"  class="form-control" id="username" value="<?php echo $selected_user["username"]?>">
                         </div>

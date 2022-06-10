@@ -2,8 +2,9 @@
 
 require "libs/vars.php";
 require "libs/connection.php";
+require "libs/functions.php";
 
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+if (isLoggedin()) {
     header("location: index.php");
     exit;
 }
