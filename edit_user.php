@@ -34,6 +34,11 @@
            
                 <div class="card-body">
                     <form method="POST">
+                        
+                    <div class="mb-3">
+                            <label for="id" class="form-label">username</label>
+                            <input name="id" type="text"  class="form-control" id="id" value="<?php echo $selected_user["id"]?>">
+                        </div>
 
                         <div class="mb-3">
                             <label for="username" class="form-label">username</label>

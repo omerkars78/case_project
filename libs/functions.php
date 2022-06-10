@@ -31,7 +31,7 @@ function get_user_id(int $id) {
 function edit_users( int $id, string  $username, string $email ) {
     include "connection.php";
 
-    $query = "UPDATE `users` SET users.id='".$id."' users.username='".$username."', users.email='".$email."' WHERE users.id='".$id."'";
+    $query = "UPDATE `users` SET users.id='".$id."' , users.username='".$username."', users.email='".$email."' WHERE users.id='".$id."'";
     $result = mysqli_query($connection,$query);
     echo mysqli_error($connection);
 
